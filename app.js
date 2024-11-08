@@ -9,7 +9,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Configura la carpeta de vistas y motor de plantillas
 app.set('views', path.join(__dirname, 'views')); // Establece la carpeta de vistas
 app.engine('html', require('ejs').renderFile); // Usa el motor de plantillas EJS
-app.set('view engine', 'html'); // Establece la extensión de los archivos
+app.set('view engine', 'ejs'); // Establece la extensión de los archivos
 
 // Rutas principales a usar
 const mainRoutes = require('./routes/index'); // Importa las rutas principales
