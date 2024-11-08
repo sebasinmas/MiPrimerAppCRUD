@@ -8,10 +8,14 @@
 </head>
 <body>
     <h1>Nombres "graciosos" y su puntuación (Según yo):</h1>
-    <ul>
-        <% nombres.forEach(nombre => { %>
-            <li><%= nombre.nombre %> - <%= nombre.puntuacion %></li>
-        <% }) %>
-    </ul>
+    <% if (typeof nombres !== 'undefined' && nombres.length > 0) { %>
+        <ul>
+            <% nombres.forEach(nombre => { %>
+                <li><%= nombre.nombre %> - <%= nombre.puntuacion %></li>
+            <% }) %>
+        </ul>
+    <% } else { %>
+        <p>No hay usuarios disponibles</p>
+    <% } %>
 </body>
 </html>
