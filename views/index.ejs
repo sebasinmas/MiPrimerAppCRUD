@@ -7,8 +7,11 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <h1>¡Hola desde Express con HTML, CSS y JS!</h1>
-    <button onclick="sayHello()">Saludar</button>
-    <script src="/js/scripts.js"></script>
+    <h1>Nombres "graciosos" y su puntuación (Según yo):</h1>
+    <ul>
+        <% nombres.forEach(nombre => { %>
+            <li><%= nombre.nombre %> - <%= nombre.puntuacion %></li>
+        <% }) %>
+    </ul>
 </body>
 </html>
