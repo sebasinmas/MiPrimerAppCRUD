@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Proyecto Express</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Nombres "graciosos" y su puntuación (Según yo):</h1>
+    <% if (typeof nombres !== 'undefined' && nombres.length > 0) { %>
+        <ul>
+            <% nombres.forEach(nombre => { %>
+                <li><%= nombre.nombre %> - <%= nombre.puntuacion %></li>
+            <% }) %>
+        </ul>
+    <% } else { %>
+        <p>No hay usuarios disponibles</p>
+    <% } %>
+</body>
+</html>
