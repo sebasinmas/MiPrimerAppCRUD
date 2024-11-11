@@ -15,8 +15,11 @@ router.get('/', async (req, res) => {  // Cuando se accede a la ruta principal
 // Ruta para agregar un nombre
 router.post('/add', async (req, res) => { // Cuando se envía un POST a /add
     const { nombre, puntuacion } = req.body; // Extrae el nombre del cuerpo de la solicitud
+    if (!nombre || !puntuacion) {
+        return res.status(400).send('Nombre y puntuación son requeridos.');
+    }
     try {
-        await db.query('INSERT INTO nombre (nombre) VALUES (?,?)', [nombre, puntuacion]); // Inserta el nombre en la base de datos
+        await db.query('INSERT INTO nombre (nombre, puntuacion) VALUES (?,?)', [nombre, puntuacion]); // Inserta el nombre en la base de datos
         res.redirect('/'); // Redirige al usuario a la página principal
     } catch (error) {
         res.status(500).send('Error en el servidor'); // Si hay un error, envía un mensaje de error al cliente
