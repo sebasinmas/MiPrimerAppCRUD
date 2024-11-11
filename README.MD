@@ -15,3 +15,27 @@ npm install
 - Next.js
 
 ---
+
+### Esta es un apunte de cómo usar .ejs:
+```
+<% /* Comentario en EJS */ %>
+
+<!-- Imprimir valores -->
+<%= variable %> <!-- Escapa el HTML -->
+<%- variable %> <!-- No escapa el HTML -->
+
+<!-- Estructuras de control -->
+<% if (condicion) { %>
+  Código HTML aquí
+<% } else { %>
+  Otro código HTML aquí
+<% } %>
+
+<% for (let item of items) { %>
+  <%= item %>
+<% } %>
+
+<!-- Incluir una vista parcial -->
+<%- include('ruta/archivo') %>
+
+```

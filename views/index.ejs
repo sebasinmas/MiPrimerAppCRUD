@@ -12,10 +12,18 @@
         <ul>
             <% nombres.forEach(nombre => { %>
                 <li><%= nombre.nombre %> - <%= nombre.puntuacion %></li>
+                <span>ver detalles id: <%= nombre.id %></span> <a href="/details/<%= nombre.id %>">aquí</a>
             <% }) %>
         </ul>
     <% } else { %>
         <p>No hay usuarios disponibles</p>
     <% } %>
+    <hr>
+    <form action="/add" method="POST">
+        <input type="text" name="nombre" placeholder="Nombre">
+        <input type="number" name="puntuacion" placeholder="Puntuación">
+        <button type="submit">Agregar</button>
+    </form>
+
 </body>
 </html>

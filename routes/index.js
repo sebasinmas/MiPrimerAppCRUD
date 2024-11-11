@@ -4,7 +4,7 @@ const db = require('../config/db'); // Importa la conexión a la base de datos
 // Ruta para la página de inicio
 router.get('/', async (req, res) => {  // Cuando se accede a la ruta principal
     try {
-        const [rows] = await db.query('SELECT * FROM Nombre'); // Consulta la base de datos. Una variable envuelta en corchetes significa que solo se usará la primera fila
+        const [rows] = await db.query('SELECT * FROM nombre'); // Consulta la base de datos. Una variable envuelta en corchetes significa que solo se usará la primera fila
         res.render('index', { nombres: rows }); // Renderiza el archivo "index.html" en la carpeta "views" y envía los nombres a la plantilla
     } catch (error) {
     
@@ -12,5 +12,28 @@ router.get('/', async (req, res) => {  // Cuando se accede a la ruta principal
         //Esto no es necesario, pero es una buena práctica.
     }
 });
+// Ruta para agregar un nombre
+router.post('/add', async (req, res) => { // Cuando se envía un POST a /add
+    const { nombre, puntuacion } = req.body; // Extrae el nombre del cuerpo de la solicitud
+    try {
+        await db.query('INSERT INTO nombre (nombre) VALUES (?,?)', [nombre, puntuacion]); // Inserta el nombre en la base de datos
+        res.redirect('/'); // Redirige al usuario a la página principal
+    } catch (error) {
+        res.status(500).send('Error en el servidor'); // Si hay un error, envía un mensaje de error al cliente
+    }
+});
+// Ruta para ver un nombre /details/{id}
+
+router.get('/details/:id', async (req, res) => { // Cuando se accede a /details/{id}
+    const { id } = req.params; // Extrae el id de los parámetros de la solicitud
+    try {
+        const [rows] = await db.query('SELECT * FROM nombre WHERE id = ?', [id]); // Consulta la base de datos para obtener el nombre con el id especificado
+        res.render('details', { nombre: rows[0] }); // Renderiza la plantilla "details.html" con el nombre obtenido
+    } catch (error) {
+        res.status(500).send('Error en el servidor'); // Si hay un error, envía un mensaje de error al cliente
+    }
+});
+
+
 
 module.exports = router; //Añade el router a la lista de rutas disponibles

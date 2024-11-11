@@ -3,3 +3,10 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
 }
+
+form{
+    margin: 20px;
+    padding: 20px;
+    background: #f4f4f4;
+    border-radius: 10px;
+}
