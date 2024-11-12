@@ -1,16 +1,76 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Detalles</title>
-</head>
-<body>
-    <h1><span>Nombre: </span><%= nombre.nombre %></h1>
-    <h2><span>Puntuación: </span><%= nombre.puntuacion %></h2>
-    <hr>
-    <a href="/">Volver</a>
-    <a href="/editar/<%= nombre.id %>">Editar</a>
-    <a href="/eliminar/<%= nombre.id %>">Eliminar</a>
-</body>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <style>
+      body {
+        background-color: #121212; /* Fondo oscuro */
+        color: #e0e0e0; /* Texto claro */
+        font-family: 'Arial', sans-serif;
+      }
+      .container {
+        max-width: 600px;
+        margin-top: 50px;
+      }
+      .card {
+        background-color: #1e1e2f; /* Fondo de la tarjeta */
+        border: none;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
+      }
+      h1, h2 {
+        color: #e4e4e4; /* Resaltado para los títulos */
+      }
+      hr {
+        border: 1px solid #2c2c3e;
+      }
+      .btn-group a {
+        margin: 5px;
+        color: white;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s, transform 0.2s;
+      }
+      .btn-group a:hover {
+        transform: scale(1.05);
+      }
+      .btn-back {
+        background-color: #4ecca3;
+      }
+      .btn-edit {
+        background-color: #ffc107;
+      }
+      .btn-delete {
+        background-color: #ff6b6b;
+      }
+      .btn-back:hover {
+        background-color: #34c98c;
+      }
+      .btn-edit:hover {
+        background-color: #e0a800;
+      }
+      .btn-delete:hover {
+        background-color: #ff5252;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card text-center">
+        <h1>Nombre: <%= nombre.nombre %></h1>
+        <h2>Puntuación: <%= nombre.puntuacion %></h2>
+        <hr />
+        <div class="btn-group d-flex justify-content-center mt-4">
+          <a href="/" class="btn-back">Volver</a>
+          <a href="/editar/<%= nombre.id %>" class="btn-edit">Editar</a>
+          <a href="/eliminar/<%= nombre.id %>" class="btn-delete">Eliminar</a>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
