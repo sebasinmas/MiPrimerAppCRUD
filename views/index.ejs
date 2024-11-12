@@ -1,29 +1,137 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mi Proyecto Express</title>
-    <link rel="stylesheet" href="/css/styles.css">
-</head>
-<body>
-    <h1>Nombres "graciosos" y su puntuación (Según yo):</h1>
-    <% if (typeof nombres !== 'undefined' && nombres.length > 0) { %>
-        <ul>
-            <% nombres.forEach(nombre => { %>
-                <li><%= nombre.nombre %> - <%= nombre.puntuacion %></li>
-                <span>ver detalles id: <%= nombre.id %></span> <a href="/details/<%= nombre.id %>">aquí</a>
-            <% }) %>
-        </ul>
-    <% } else { %>
-        <p>No hay usuarios disponibles</p>
-    <% } %>
-    <hr>
-    <form action="/add" method="POST">
-        <input id="nombre" type="text" name="nombre" placeholder="Nombre">
-        <input id="puntuacion" type="number" name="puntuacion" placeholder="Puntuación">
-        <button type="submit">Agregar</button>
-    </form>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <style>
+      body {
+        background-color: #121212; /* Fondo más oscuro para un contraste fuerte */
+        color: #e0e0e0; /* Texto ligeramente gris para no ser agresivo */
+        font-family: 'Arial', sans-serif;
+      }
+      .container {
+        max-width: 800px;
+      }
+      .card {
+        background-color: #1e1e2f; /* Fondo suave para tarjetas */
+        border: none;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
+        border-radius: 12px;
+      }
+      .list-group-item {
+        background-color: #1e1e2f; /* Fondo uniforme para ítems */
+        border: 1px solid #2c2c3e;
+        color: #e0e0e0;
+        transition: transform 0.2s, background-color 0.2s;
+      }
+      .list-group-item:hover {
+        transform: scale(1.02);
+        background-color: #29293d;
+      }
+      .badge {
+        background-color: #ff6b6b; /* Resaltado con color vibrante */
+        font-size: 1rem;
+      }
+      .btn-info {
+        background-color: #4ecca3;
+        border: none;
+        color: #1e1e2f;
+      }
+      .btn-info:hover {
+        background-color: #34c98c;
+        color: white;
+      }
+      h1 {
+        font-size: 2.5rem;
+        color: #F8FEF3;
+      }
+      p.lead {
+        color: #F8FEF3;
+      }
+      .form-control {
+        background-color: #e0e0e0;
+        border: 1px solid #2c2c3e;
+      }
+      .form-control:focus {
+        border-color: #4ecca3;
+        box-shadow: 0 0 5px #4ecca3;
+      }
+      .btn-primary {
+        background-color: #ff6b6b;
+        border: none;
+        transition: background-color 0.3s;
+      }
+      .btn-primary:hover {
+        background-color: #ff5252;
+      }
+      .alert {
+        background-color: #29293d;
+        border: none;
+        color: #e0e0e0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container py-5">
+      <!-- Encabezado -->
+      <div class="text-center mb-5">
+        <h1>Nombres "graciosos" y su puntuación</h1>
+        <p class="lead">Un ranking divertido hecho por mí.</p>
+      </div>
 
-</body>
+      <!-- Lista de nombres -->
+      <% if (typeof nombres !== 'undefined' && nombres.length > 0) { %>
+      <ul class="list-group mb-5">
+        <% nombres.forEach(nombre => { %>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div class="justify-content">
+            <strong><%= nombre.nombre %></strong>
+            <span class="badge ms-3"><%= nombre.puntuacion %></span>
+          </div>
+          <a href="/details/<%= nombre.id %>" class="btn btn-sm btn-info">Detalles</a>
+        </li>
+        <% }) %>
+      </ul>
+      <% } else { %>
+      <div class="alert text-center">
+        No hay nombres disponibles. ¡Agrega uno abajo!
+      </div>
+      <% } %>
+
+      <!-- Formulario para agregar nombres -->
+      <div class="card mx-auto p-4 text-white">
+        <h5 class="card-title text-center mb-4">Agregar un nuevo nombre</h5>
+        <form action="/add" method="POST">
+          <div class="mb-3">
+            <label for="nombre" class="form-label ">Nombre</label>
+            <input
+              id="nombre"
+              type="text"
+              name="nombre"
+              class="form-control"
+              placeholder="Ingresa un nombre"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="puntuacion" class="form-label">Puntuación</label>
+            <input
+              id="puntuacion"
+              type="number"
+              name="puntuacion"
+              class="form-control"
+              placeholder="Puntuación del 1 al 10"
+              min="1"
+              max="10"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Agregar Nombre</button>
+        </form>
+      </div>
+    </div>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>
